@@ -41,4 +41,23 @@ class DynamicVpAdapter : FragmentStateAdapter {
         this.fragments.addAll(fragments)
         notifyDataSetChanged()
     }
+
+    fun addFragment(fragment: Fragment) {
+        addFragment(this.fragments.size, fragment)
+    }
+
+    fun addFragment(index: Int, fragment: Fragment) {
+        this.fragments.add(index, fragment)
+        notifyItemInserted(index)
+    }
+
+    fun removeFragment(fragment: Fragment) {
+        val index = this.fragments.indexOf(fragment)
+        removeFragment(index)
+    }
+
+    fun removeFragment(index: Int) {
+        this.fragments.removeAt(index)
+        notifyItemRemoved(index)
+    }
 }

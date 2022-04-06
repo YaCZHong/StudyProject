@@ -1,16 +1,19 @@
 package com.czh.studyproject.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.czh.studyproject.R
-import com.czh.studyproject.ui.adapter.vp.DynamicVpAdapter
+import android.view.LayoutInflater
+import com.czh.studyproject.databinding.ActivityMainBinding
+import com.czh.studyproject.ui.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val mAdapter = DynamicVpAdapter(this)
+    override fun initBinding(layoutInflater: LayoutInflater): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun init(savedInstanceState: Bundle?) {
+        binding.btnUi.setOnClickListener {
+            gotoActivity(UIActivity::class.java)
+        }
     }
 }

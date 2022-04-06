@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.activity.UIActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,10 +12,15 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_ui"
+            android:id="@+id/btn_static_vp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="UI相关" />
+            android:text="静态vp" />
 
+        <Button
+            android:id="@+id/btn_dynamic_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动态vp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

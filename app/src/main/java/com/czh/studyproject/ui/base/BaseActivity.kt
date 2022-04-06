@@ -1,5 +1,6 @@
 package com.czh.studyproject.ui.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +8,10 @@ import androidx.viewbinding.ViewBinding
 import com.czh.studyproject.ui.dialog.LoadingDialog
 
 /**
-* @Description: Activity基类
-* @Author: czh
-* @CreateDate: 2022/4/5 0:46
-*/
+ * @Description: Activity基类
+ * @Author: czh
+ * @CreateDate: 2022/4/5 0:46
+ */
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     private var loading: LoadingDialog? = null
@@ -34,5 +35,15 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     fun hideLoading() {
         loading?.dismiss()
+    }
+
+    fun <T : ViewBinding, K : BaseActivity<T>> gotoActivity(
+        clazz: Class<K>,
+        bundle: Bundle = Bundle()
+    ) {
+        Intent(this, clazz).apply {
+            putExtras(bundle)
+            startActivity(this)
+        }
     }
 }
