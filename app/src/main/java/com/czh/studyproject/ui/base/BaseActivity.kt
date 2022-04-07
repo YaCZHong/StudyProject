@@ -37,10 +37,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         loading?.dismiss()
     }
 
-    fun <T : ViewBinding, K : BaseActivity<T>> gotoActivity(
-        clazz: Class<K>,
-        bundle: Bundle = Bundle()
-    ) {
+    fun gotoActivity(clazz: Class<out BaseActivity<out ViewBinding>>, bundle: Bundle = Bundle()) {
         Intent(this, clazz).apply {
             putExtras(bundle)
             startActivity(this)
