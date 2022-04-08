@@ -11,7 +11,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
  */
 class StaticVpAdapter : FragmentStateAdapter {
 
-    private var fragments: List<Fragment>
+    private val fragments: List<Fragment>
 
     constructor(fragmentActivity: FragmentActivity, fragments: List<Fragment>) : super(
         fragmentActivity
