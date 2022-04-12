@@ -6,8 +6,7 @@ import com.czh.studyproject.R
 import com.czh.studyproject.databinding.FragmentTextBinding
 import com.czh.studyproject.ui.base.BaseFragment
 
-class TextFragment private constructor() :
-    BaseFragment<FragmentTextBinding>(R.layout.fragment_text) {
+class TextFragment : BaseFragment<FragmentTextBinding>(R.layout.fragment_text) {
 
     override fun initBinding(view: View): FragmentTextBinding {
         return FragmentTextBinding.bind(view)
