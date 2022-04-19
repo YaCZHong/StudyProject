@@ -2,6 +2,7 @@ package com.czh.studyproject.ui.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.czh.crash.ui.activity.CrashListActivity
 import com.czh.studyproject.databinding.ActivityMainBinding
 import com.czh.studyproject.ui.base.BaseActivity
 
@@ -12,8 +13,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        binding.btnUi.setOnClickListener {
-            gotoActivity(UIActivity::class.java)
+        binding.apply {
+            btnCrash.setOnClickListener {
+                CrashListActivity.actionStart(this@MainActivity)
+            }
+            btnUi.setOnClickListener {
+                gotoActivity(UIActivity::class.java)
+            }
         }
     }
 }

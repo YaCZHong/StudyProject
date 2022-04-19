@@ -1,19 +1,18 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdk rootProject.ext.sdkVersion.compile_version
 
     defaultConfig {
-        applicationId "com.czh.studyproject"
         minSdk rootProject.ext.sdkVersion.min_version
         targetSdk rootProject.ext.sdkVersion.target_version
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -29,20 +28,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 
 dependencies {
-    implementation project(path: ':crash')
-
-    implementation rootProject.ext.depsLibs.coreKtx
-    implementation rootProject.ext.depsLibs.appcompat
     implementation rootProject.ext.depsLibs.material
-    implementation rootProject.ext.depsLibs.constraintlayout
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation rootProject.ext.depsLibs.roomRuntime
+    implementation rootProject.ext.depsLibs.roomKtx
+    kapt rootProject.ext.depsLibs.roomCompiler
 }

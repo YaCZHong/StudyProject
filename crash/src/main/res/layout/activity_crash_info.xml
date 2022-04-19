@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_ffffff_radius_8dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="CRASH发生时间" />
+
+        <TextView
+            android:id="@+id/tv_crash_time"
+            style="@style/tvContent"
+            tools:text="2021/12/14" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="用户ID" />
+
+        <TextView
+            android:id="@+id/tv_user_id"
+            style="@style/tvContent"
+            tools:text="123456" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="APP版本名" />
+
+        <TextView
+            android:id="@+id/tv_app_version_name"
+            style="@style/tvContent"
+            tools:text="1.0.0" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="APP版本号" />
+
+        <TextView
+            android:id="@+id/tv_app_version_code"
+            style="@style/tvContent"
+            tools:text="1" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="手机品牌" />
+
+        <TextView
+            android:id="@+id/tv_device_brand"
+            style="@style/tvContent"
+            tools:text="华为" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="手机型号" />
+
+        <TextView
+            android:id="@+id/tv_device_model"
+            style="@style/tvContent"
+            tools:text="HONOR 9" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="安卓系统版本" />
+
+        <TextView
+            android:id="@+id/tv_os_version"
+            style="@style/tvContent"
+            tools:text="9" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="CRASH所在线程" />
+
+        <TextView
+            android:id="@+id/tv_thread_name"
+            style="@style/tvContent"
+            tools:text="main" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="CRASH类型" />
+
+        <TextView
+            android:id="@+id/tv_throwable_simple"
+            style="@style/tvContent"
+            tools:text="1.0.0" />
+
+        <View
+            style="@style/line"
+            android:layout_marginVertical="8dp" />
+
+        <TextView
+            style="@style/tvTitle"
+            android:text="CRASH详情" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_throwable_detail"
+                style="@style/tvContent"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                tools:text="1.0.0" />
+        </HorizontalScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
