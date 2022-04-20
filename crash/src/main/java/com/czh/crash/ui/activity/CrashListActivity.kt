@@ -3,11 +3,12 @@ package com.czh.crash.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.czh.crash.CrashHandler
 import com.czh.crash.R
 import com.czh.crash.ui.adapter.CrashAdapter
 import com.czh.crash.ui.decoration.MyItemDecoration
+import com.czh.crash.vm.CrashVM
 
 class CrashListActivity : CrashBaseActivity() {
 
@@ -20,6 +21,8 @@ class CrashListActivity : CrashBaseActivity() {
     override val activityTitle: String
         get() = "CRASH列表"
 
+    private val vm by viewModels<CrashVM>()
+
     private lateinit var mAdapter: CrashAdapter
     private lateinit var rvCrash: RecyclerView
 
@@ -30,13 +33,23 @@ class CrashListActivity : CrashBaseActivity() {
     }
 
     private fun init() {
+        initUI()
+        initData()
+    }
+
+    private fun initUI() {
         rvCrash = findViewById(R.id.rv_crash)
         rvCrash.addItemDecoration(MyItemDecoration())
-        CrashHandler.readAllCrashFromDB { list ->
-            mAdapter = CrashAdapter(list) { crash ->
-                CrashInfoActivity.actionStart(this, crash.uid)
+    }
+
+    private fun initData() {
+        vm.readAllCrashFromDB().observe(this) { list ->
+            list?.let {
+                mAdapter = CrashAdapter(it) { crash ->
+                    CrashInfoActivity.actionStart(this, crash.uid)
+                }
+                rvCrash.adapter = mAdapter
             }
-            rvCrash.adapter = mAdapter
         }
     }
 }

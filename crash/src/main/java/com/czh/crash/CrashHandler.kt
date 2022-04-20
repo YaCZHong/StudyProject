@@ -8,8 +8,7 @@ import com.czh.crash.info.DeviceInfo
 import com.czh.crash.info.VersionInfo
 import com.czh.crash.util.getDeviceInfo
 import com.czh.crash.util.getVersionInfo
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import kotlinx.coroutines.*
 import kotlin.system.exitProcess
 
 /**
@@ -23,7 +22,6 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
         get() = System.currentTimeMillis()
 
     private val mDefaultHandler by lazy { Thread.getDefaultUncaughtExceptionHandler() }
-    private val mExecutor: ExecutorService by lazy { Executors.newSingleThreadExecutor() }
 
     private lateinit var mApplication: Application
     private lateinit var mCrashConfig: CrashConfig
@@ -62,7 +60,7 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
         if (mCrashConfig.useDefaultHandler && mDefaultHandler != null) {
             mDefaultHandler.uncaughtException(thread, throwable)
         } else {
-            mExecutor.submit {
+            runBlocking {
                 Crash(
                     timestamp = timestamp,
                     userId = userId,
@@ -79,12 +77,6 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
                     mCrashDatabase.close()
                 }
             }
-
-            try {
-                Thread.sleep(3000)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
             exitApp()
         }
     }
@@ -98,23 +90,10 @@ object CrashHandler : Thread.UncaughtExceptionHandler {
         this.userId = userId
     }
 
-    fun readAllCrashFromDB(callback: (crashList: List<Crash>) -> Unit) {
+    fun getCrashDb(): CrashDatabase {
         check(inited) {
             "Please call CrashHandler init() first!"
         }
-        mExecutor.submit {
-            val crashList = mCrashDatabase.CrashDao().getAll()
-            callback.invoke(crashList)
-        }
-    }
-
-    fun readCrashFromDB(uid: Int, callback: (Crash) -> Unit) {
-        check(inited) {
-            "Please call CrashHandler init() first!"
-        }
-        mExecutor.submit {
-            val crash = mCrashDatabase.CrashDao().getCrash(uid)
-            callback.invoke(crash)
-        }
+        return mCrashDatabase
     }
 }

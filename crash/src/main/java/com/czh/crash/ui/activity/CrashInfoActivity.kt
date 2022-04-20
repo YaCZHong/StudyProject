@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
 import android.widget.Toast
-import com.czh.crash.CrashHandler
+import androidx.activity.viewModels
 import com.czh.crash.R
 import com.czh.crash.ui.util.ParseTimeUtil
+import com.czh.crash.vm.CrashVM
 
 internal class CrashInfoActivity : CrashBaseActivity() {
     companion object {
@@ -26,6 +27,7 @@ internal class CrashInfoActivity : CrashBaseActivity() {
         get() = "CRASH详情"
 
     private var uid: Int = -1
+    private val vm by viewModels<CrashVM>()
 
     private lateinit var tvCrashTime: TextView
     private lateinit var tvUserId: TextView
@@ -53,7 +55,7 @@ internal class CrashInfoActivity : CrashBaseActivity() {
     private fun initIntent() {
         uid = intent.getIntExtra(UID, -1)
         if (uid == -1) {
-            Toast.makeText(this, "获取uid失败！", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "无效的uid值！", Toast.LENGTH_SHORT).show()
             onBackPressed()
         }
     }
@@ -72,8 +74,8 @@ internal class CrashInfoActivity : CrashBaseActivity() {
     }
 
     private fun initData() {
-        CrashHandler.readCrashFromDB(uid) {
-            runOnUiThread {
+        vm.readCrashFromDB(uid).observe(this) { crash ->
+            crash?.let {
                 tvCrashTime.text = ParseTimeUtil.parseTime(it.timestamp)
                 tvUserId.text = if (TextUtils.isEmpty(it.userId)) "未设置用户ID" else it.userId
                 tvAppVersionName.text = it.versionName
