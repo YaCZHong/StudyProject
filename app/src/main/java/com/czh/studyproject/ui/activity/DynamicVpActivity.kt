@@ -26,6 +26,7 @@ class DynamicVpActivity : BaseActivity<ActivityDynamicVpBinding>() {
                 mAdapter.removeFragment(vpDynamic.currentItem)
             }
             vpDynamic.adapter = mAdapter
+            indicator.bindVp(vpDynamic)
         }
     }
 }
