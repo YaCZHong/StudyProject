@@ -1,4 +1,4 @@
-package com.czh.studyproject.ui.activity
+package com.czh.studyproject.ui.activity.vp
 
 import android.os.Bundle
 import android.view.LayoutInflater

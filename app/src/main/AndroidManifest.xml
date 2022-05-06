@@ -11,13 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyProject">
         <activity
-            android:name=".ui.activity.DynamicVpActivity"
+            android:name=".ui.activity.vp.DynamicVpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.StaticVpActivity"
+            android:name=".ui.activity.vp.StaticVpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.UIActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.rv.RvBrokenLineActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

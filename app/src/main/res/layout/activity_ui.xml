@@ -22,5 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="动态vp" />
+
+        <Button
+            android:id="@+id/btn_rv_broken_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="rv折线" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
