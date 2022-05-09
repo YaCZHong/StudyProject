@@ -16,6 +16,9 @@ class UIActivity : BaseActivity<ActivityUiBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         binding.apply {
+            btnWeb.setOnClickListener {
+                gotoActivity(SimpleWebActivity::class.java)
+            }
             btnStaticVp.setOnClickListener {
                 gotoActivity(StaticVpActivity::class.java)
             }

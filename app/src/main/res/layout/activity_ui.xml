@@ -12,6 +12,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_web"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="简单的webview" />
+
+        <Button
             android:id="@+id/btn_static_vp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
