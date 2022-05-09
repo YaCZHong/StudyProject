@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "StudyProject"
 include ':app'
 include ':crash'
+include ':http'
