@@ -1,0 +1,9 @@
+<resources>
+    <!--  http相关(http)  -->
+    <string name="http_timeout_error">网络连接超时</string>
+    <string name="http_connect_error">网络连接异常</string>
+    <string name="http_parse_error">网络解析异常</string>
+    <string name="http_certificate_error">证书验证失败</string>
+    <string name="http_param_error">请求参数错误</string>
+    <string name="http_unknown_error">未知网络错误</string>
+</resources>

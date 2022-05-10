@@ -2,7 +2,7 @@ package com.czh.http.interceptor
 
 import android.util.Log
 import com.czh.http.HttpManager
-import com.czh.http.HttpRequestBean
+import com.czh.http.HttpReportBean
 import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
 import kotlin.jvm.Throws
 
-class HttpResponseInterceptor : Interceptor {
+class DefaultHttpResponseInterceptor : Interceptor {
 
     companion object {
         private const val TAG = "HttpResponseInterceptor"
@@ -44,9 +44,9 @@ class HttpResponseInterceptor : Interceptor {
             responseCode = ""
             responseBodyStr = "HTTP FAILED: $e"
             takeMs = ""
-            val httpRequestBean =
-                HttpRequestBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
-            Log.e(TAG, httpRequestBean.toString())
+            val httpReportBean =
+                HttpReportBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
+//            Log.e(TAG, httpReportBean.toString())
             throw e
         }
         takeMs = "${TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)}ms"
@@ -84,11 +84,9 @@ class HttpResponseInterceptor : Interceptor {
             }
         }
 
-        val httpRequestBean =
-            HttpRequestBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
-        Log.e(TAG, httpRequestBean.toString())
-
-        handleExceptionCode(responseBodyStr)
+        val httpReportBean = HttpReportBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
+//        Log.e(TAG, httpReportBean.toString())
+//        handleExceptionCode(responseBodyStr)
 
         return response
     }
@@ -122,14 +120,14 @@ class HttpResponseInterceptor : Interceptor {
     private fun handleExceptionCode(responseBodyStr: String) {
         try {
             val bodyObject = JSONObject(responseBodyStr)
-            val code = bodyObject.optInt("errorCode")
+            val code = bodyObject.optInt("code")
             when (code) {
                 0 -> {
                     Log.e(TAG, "CODE IS NO PROBLEM")
                 }
                 else -> {
                     Log.e(TAG, "CODE ERROR")
-                    HttpManager.mErrorCallBack?.invoke(code)
+                    HttpManager.config.apiExceptionHandler?.handleException(code)
                 }
             }
         } catch (e: Exception) {

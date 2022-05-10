@@ -1,11 +1,11 @@
 package com.czh.http
 
-import android.util.Log
-import com.czh.http.interceptor.HttpResponseInterceptor
+import com.czh.http.HttpManager.init
+import okhttp3.Cache
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
@@ -14,21 +14,23 @@ import java.util.concurrent.TimeUnit
  */
 object HttpManager {
 
-    private var mBaseUrl: String? = null
-    var mErrorCallBack: ((errorCode: Int) -> Unit)? = null
+    lateinit var config: HttpConfig
+
+    fun init(config: HttpConfig) {
+        this.config = config
+    }
 
     /**
      * okHttpClient变量，可供应用内全局使用
      */
     val okHttpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder()
-            .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-//            .addInterceptor(logger)
-//            .addInterceptor(HttpHeaderInterceptor())
-            .addInterceptor(HttpResponseInterceptor())
-            .build()
+        val builder = OkHttpClient.Builder()
+            .connectTimeout(config.timeout, TimeUnit.SECONDS)
+            .readTimeout(config.timeout, TimeUnit.SECONDS)
+            .writeTimeout(config.timeout, TimeUnit.SECONDS)
+            .cache(Cache(File(config.cacheDir), config.maxCacheSize))
+        config.interceptors.forEach { builder.addInterceptor(it) }
+        builder.build()
     }
 
     /**
@@ -36,28 +38,9 @@ object HttpManager {
      */
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(mBaseUrl)
+            .baseUrl(config.baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    /**
-     * 网络日志拦截，打印相关网络请求的相应数据
-     */
-    private val logger: HttpLoggingInterceptor by lazy {
-        HttpLoggingInterceptor { message -> Log.e("HTTP_LOG", message) }.also {
-            it.level = HttpLoggingInterceptor.Level.BODY
-        }
-    }
-
-    /**
-     * 初始化HttpManager
-     * @param baseUrl retrofit所需的baseUrl
-     * @param errorCallback 接口状态码错误的处理回调方法
-     */
-    fun init(baseUrl: String, errorCallback: (errorCode: Int) -> Unit) {
-        this.mBaseUrl = baseUrl
-        this.mErrorCallBack = errorCallback
     }
 }

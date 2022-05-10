@@ -1,14 +1,14 @@
 package com.czh.studyproject.util
 
 import android.util.TypedValue
-import com.czh.studyproject.App
+import com.czh.xhlib.AppConfig
 
 fun dp2px(dp: Int): Float {
     return dp2px(dp.toFloat())
 }
 
 fun dp2px(dp: Float): Float {
-    val metrics = App.sInstance.resources.displayMetrics
+    val metrics = AppConfig.context.resources.displayMetrics
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics)
 }
 
@@ -17,6 +17,6 @@ fun sp2px(sp: Int): Float {
 }
 
 fun sp2px(sp: Float): Float {
-    val metrics = App.sInstance.resources.displayMetrics
+    val metrics = AppConfig.context.resources.displayMetrics
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics)
 }

@@ -3,17 +3,26 @@ package com.czh.studyproject
 import android.app.Application
 import com.czh.crash.CrashConfig
 import com.czh.crash.CrashHandler
+import com.czh.http.HttpConfig
+import com.czh.http.HttpManager
+import com.czh.studyproject.http.ApiExceptionHandlerImpl
+import com.czh.studyproject.http.TokenAuthenticatorImpl
+import com.czh.xhlib.AppConfig
 
 class App : Application() {
-    companion object {
-        private var instance: App? = null
-        val sInstance: App
-            get() = instance!!
-    }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+
+        AppConfig.init(this)
+
+        HttpManager.init(
+            HttpConfig.Builder()
+                .setBaseUrl("")
+                .setAuthenticator(TokenAuthenticatorImpl)
+                .setApiExceptionHandler(ApiExceptionHandlerImpl)
+                .build()
+        )
         CrashHandler.init(this, CrashConfig.Builder().build())
     }
 }

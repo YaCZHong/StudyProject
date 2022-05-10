@@ -35,7 +35,9 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':http')
     implementation project(path: ':crash')
+    implementation project(path: ':xhlib')
 
     implementation rootProject.ext.depsLibs.coreKtx
     implementation rootProject.ext.depsLibs.appcompat
