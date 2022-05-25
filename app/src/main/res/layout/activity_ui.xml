@@ -34,5 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="rv折线" />
+
+        <Button
+            android:id="@+id/btn_full_screen_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="全屏对话框" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
