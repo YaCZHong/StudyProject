@@ -1,4 +1,4 @@
-package com.czh.studyproject.http
+package com.czh.studyproject.http.authenticator
 
 import android.text.TextUtils
 import com.czh.http.authenticator.TokenAuthenticator

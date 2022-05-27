@@ -117,21 +117,21 @@ class DefaultHttpResponseInterceptor : Interceptor {
         }
     }
 
-    private fun handleExceptionCode(responseBodyStr: String) {
-        try {
-            val bodyObject = JSONObject(responseBodyStr)
-            val code = bodyObject.optInt("code")
-            when (code) {
-                0 -> {
-                    Log.e(TAG, "CODE IS NO PROBLEM")
-                }
-                else -> {
-                    Log.e(TAG, "CODE ERROR")
-                    HttpManager.config.apiExceptionHandler?.handleException(code)
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+//    private fun handleExceptionCode(responseBodyStr: String) {
+//        try {
+//            val bodyObject = JSONObject(responseBodyStr)
+//            val code = bodyObject.optInt("code")
+//            when (code) {
+//                0 -> {
+//                    Log.e(TAG, "CODE IS NO PROBLEM")
+//                }
+//                else -> {
+//                    Log.e(TAG, "CODE ERROR")
+//                    HttpManager.config.apiExceptionHandler?.handleException(code)
+//                }
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//    }
 }
