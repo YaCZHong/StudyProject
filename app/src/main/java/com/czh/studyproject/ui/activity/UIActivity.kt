@@ -30,7 +30,10 @@ class UIActivity : BaseActivity<ActivityUiBinding>() {
                 gotoActivity(RvBrokenLineActivity::class.java)
             }
             btnFullScreenDialog.setOnClickListener {
-                FullScreenDialog.newInstance().show(supportFragmentManager,"")
+                FullScreenDialog.newInstance().show(supportFragmentManager, "")
+            }
+            btnSpinner.setOnClickListener {
+                gotoActivity(SpinnerActivity::class.java)
             }
         }
     }

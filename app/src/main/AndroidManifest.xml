@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.czh.studyproject">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -26,6 +26,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.rv.RvBrokenLineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SpinnerActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

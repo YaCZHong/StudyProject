@@ -31,18 +31,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 gotoActivity(UIActivity::class.java)
             }
         }
-        loginVM.login("牛儿不吃草czhlxm", "ch551569lxm").observe(this, Observer {
-            when (it) {
-                is ApiSuccessResponse -> {
-                    toast(it.body.data.toString())
-                }
-                is ApiFailureResponse -> {
-                    ApiExceptionHandlerImpl.handleException(it.apiCode)
-                }
-                is ApiErrorResponse -> {
-                    toast(it.errorMsg)
-                }
-            }
-        })
+//        loginVM.login("牛儿不吃草czhlxm", "ch551569lxm").observe(this, Observer {
+//            when (it) {
+//                is ApiSuccessResponse -> {
+//                    toast(it.body.data.toString())
+//                }
+//                is ApiFailureResponse -> {
+//                    ApiExceptionHandlerImpl.handleException(it.apiCode)
+//                }
+//                is ApiErrorResponse -> {
+//                    toast(it.errorMsg)
+//                }
+//            }
+//        })
     }
 }
