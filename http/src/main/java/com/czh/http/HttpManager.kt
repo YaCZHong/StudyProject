@@ -29,6 +29,7 @@ object HttpManager {
             .readTimeout(config.timeout, TimeUnit.SECONDS)
             .writeTimeout(config.timeout, TimeUnit.SECONDS)
             .cache(Cache(File(config.cacheDir), config.maxCacheSize))
+        config.authenticator?.let { builder.authenticator(it) }
         config.interceptors.forEach { builder.addInterceptor(it) }
         builder.build()
     }

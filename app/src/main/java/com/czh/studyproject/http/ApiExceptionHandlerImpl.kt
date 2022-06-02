@@ -1,4 +1,4 @@
-package com.czh.studyproject.http.exception
+package com.czh.studyproject.http
 
 import com.czh.http.handler.ApiExceptionHandler
 

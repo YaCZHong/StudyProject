@@ -1,11 +1,13 @@
 package com.czh.http.response
 
-import android.os.Parcelable
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
-abstract class BaseResponse<T>(
-    val code: Int = 0,
-    val msg: String = "",
-    val data: T? = null
-) : Parcelable {
+@Keep
+data class BaseResponse<T>(
+    @SerializedName("errorCode") val code: Int,
+    @SerializedName("errorMsg") val msg: String,
+    val data: T
+) {
     fun isSuccess() = code == 0
 }

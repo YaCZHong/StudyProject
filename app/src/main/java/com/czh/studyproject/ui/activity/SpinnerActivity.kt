@@ -1,6 +1,7 @@
 package com.czh.studyproject.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -36,11 +37,16 @@ class SpinnerActivity : BaseActivity<ActivitySpinnerBinding>() {
                     id: Long
                 ) {
                     toast(data[position])
+                    Log.d(TAG,data[position])
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 //            spinner.setSelection(6)
         }
+    }
+
+    companion object{
+        private const val TAG = "SpinnerActivity"
     }
 }

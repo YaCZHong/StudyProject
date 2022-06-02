@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.czh.http.response.ApiResponse
+import com.czh.http.response.ApiResult
 import com.czh.http.response.BaseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,22 +17,20 @@ import kotlinx.coroutines.withContext
  */
 abstract class HttpBaseViewModel : ViewModel() {
 
-    protected val TAG = this.javaClass.simpleName
-
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
     private var loadingCount: Int = 0
 
-    fun <T : BaseResponse<*>> launch(block: suspend () -> T): LiveData<ApiResponse<T>> {
-        val liveData = MutableLiveData<ApiResponse<T>>()
+    fun <T> launch(block: suspend () -> BaseResponse<T>): LiveData<ApiResult<T>> {
+        val liveData = MutableLiveData<ApiResult<T>>()
         viewModelScope.launch(Dispatchers.Main) {
             handleLoadingStatus(true)
             try {
                 val response = withContext(Dispatchers.IO) {
                     block.invoke()
                 }
-                liveData.value = ApiResponse.create(response)
+                liveData.value = ApiResult.createApiResult(response)
             } catch (e: Exception) {
-                liveData.value = ApiResponse.create(e)
+                liveData.value = ApiResult.createApiResult(e)
             } finally {
                 handleLoadingStatus(false)
             }

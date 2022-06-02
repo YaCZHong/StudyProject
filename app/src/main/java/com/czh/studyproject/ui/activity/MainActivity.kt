@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.czh.crash.ui.activity.CrashListActivity
-import com.czh.http.response.ApiErrorResponse
-import com.czh.http.response.ApiFailureResponse
-import com.czh.http.response.ApiSuccessResponse
 import com.czh.studyproject.databinding.ActivityMainBinding
-import com.czh.studyproject.http.exception.ApiExceptionHandlerImpl
+import com.czh.studyproject.http.helper.handleApiResult
 import com.czh.studyproject.ui.base.BaseActivity
 import com.czh.studyproject.vm.LoginVM
 import com.czh.xhlib.toast.toast
@@ -31,18 +28,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 gotoActivity(UIActivity::class.java)
             }
         }
-//        loginVM.login("牛儿不吃草czhlxm", "ch551569lxm").observe(this, Observer {
-//            when (it) {
-//                is ApiSuccessResponse -> {
-//                    toast(it.body.data.toString())
-//                }
-//                is ApiFailureResponse -> {
-//                    ApiExceptionHandlerImpl.handleException(it.apiCode)
-//                }
-//                is ApiErrorResponse -> {
-//                    toast(it.errorMsg)
-//                }
-//            }
-//        })
+        loginVM.loadingLiveData.observe(this, Observer { show ->
+            if (show) {
+                showLoading("请稍候...")
+            } else {
+                hideLoading()
+            }
+        })
+        loginVM.login("牛儿不吃草", "czh551569lxm").observe(this, Observer {
+            handleApiResult(it, onSuccess = { userBean ->
+                toast("成功了：$userBean")
+            }, onFailure = { apiCode, apiMsg ->
+                toast("失败了：$apiCode,$apiMsg")
+            }, onError = { errorCode, errorMsg ->
+                toast("异常了：$errorCode,$errorMsg")
+            })
+        })
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

@@ -1,21 +1,17 @@
 package com.czh.http.interceptor
 
-import android.util.Log
-import com.czh.http.HttpManager
-import com.czh.http.HttpReportBean
+import androidx.annotation.Keep
 import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.internal.http.promisesBody
 import okio.Buffer
 import okio.GzipSource
-import org.json.JSONObject
 import java.io.EOFException
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.TimeUnit
-import kotlin.jvm.Throws
 
 class DefaultHttpResponseInterceptor : Interceptor {
 
@@ -84,9 +80,9 @@ class DefaultHttpResponseInterceptor : Interceptor {
             }
         }
 
-        val httpReportBean = HttpReportBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
+        val httpReportBean =
+            HttpReportBean(requestMethod, requestUrl, responseCode, responseBodyStr, takeMs)
 //        Log.e(TAG, httpReportBean.toString())
-//        handleExceptionCode(responseBodyStr)
 
         return response
     }
@@ -116,22 +112,16 @@ class DefaultHttpResponseInterceptor : Interceptor {
             return false // Truncated UTF-8 sequence.
         }
     }
-
-//    private fun handleExceptionCode(responseBodyStr: String) {
-//        try {
-//            val bodyObject = JSONObject(responseBodyStr)
-//            val code = bodyObject.optInt("code")
-//            when (code) {
-//                0 -> {
-//                    Log.e(TAG, "CODE IS NO PROBLEM")
-//                }
-//                else -> {
-//                    Log.e(TAG, "CODE ERROR")
-//                    HttpManager.config.apiExceptionHandler?.handleException(code)
-//                }
-//            }
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 }
+
+/**
+ * 可用于做日志上报
+ */
+@Keep
+internal data class HttpReportBean(
+    val requestMethod: String,
+    val requestUrl: String,
+    val responseCode: String,
+    val responseBodyStr: String,
+    val tookMs: String
+)

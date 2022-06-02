@@ -6,8 +6,6 @@ import com.czh.crash.CrashHandler
 import com.czh.http.HttpConfig
 import com.czh.http.HttpManager
 import com.czh.studyproject.http.BASE_URL
-import com.czh.studyproject.http.exception.ApiExceptionHandlerImpl
-import com.czh.studyproject.http.authenticator.TokenAuthenticatorImpl
 import com.czh.xhlib.AppConfig
 
 class App : Application() {
@@ -20,8 +18,6 @@ class App : Application() {
         HttpManager.init(
             HttpConfig.Builder()
                 .setBaseUrl(BASE_URL)
-                .setAuthenticator(TokenAuthenticatorImpl)
-                .setApiExceptionHandler(ApiExceptionHandlerImpl)
                 .build()
         )
         CrashHandler.init(this, CrashConfig.Builder().build())
