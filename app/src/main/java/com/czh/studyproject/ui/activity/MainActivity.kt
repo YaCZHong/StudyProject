@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.czh.crash.ui.activity.CrashListActivity
 import com.czh.studyproject.databinding.ActivityMainBinding
-import com.czh.studyproject.http.helper.handleApiResult
+import com.czh.studyproject.http.observer.ApiResultObserver
 import com.czh.studyproject.ui.base.BaseActivity
 import com.czh.studyproject.vm.LoginVM
 import com.czh.xhlib.toast.toast
@@ -35,15 +35,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 hideLoading()
             }
         })
-        loginVM.login("牛儿不吃草", "czh551569lxm").observe(this, Observer {
-            handleApiResult(it, onSuccess = { userBean ->
-                toast("成功了：$userBean")
-            }, onFailure = { apiCode, apiMsg ->
-                toast("失败了：$apiCode,$apiMsg")
-            }, onError = { errorCode, errorMsg ->
-                toast("异常了：$errorCode,$errorMsg")
-            })
-        })
+        loginVM.login("牛儿不吃草czhlx", "czh551569lxm").observe(this, ApiResultObserver(onSuccess = {
+            toast(it.toString())
+        }))
     }
 
     companion object {

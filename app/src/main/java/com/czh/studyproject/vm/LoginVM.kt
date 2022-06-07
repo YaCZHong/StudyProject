@@ -6,9 +6,9 @@ import com.czh.http.response.ApiResult
 import com.czh.studyproject.http.model.UserBean
 import com.czh.studyproject.http.repo.LoginRepo
 
-class LoginVM: HttpBaseViewModel() {
+class LoginVM : HttpBaseViewModel() {
 
-    fun login(userName: String, password: String):LiveData<ApiResult<UserBean>>{
+    fun login(userName: String, password: String): LiveData<ApiResult<UserBean>> {
         return launch { LoginRepo.login(userName, password) }
     }
 }
