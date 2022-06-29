@@ -20,6 +20,6 @@ class App : Application() {
                 .setBaseUrl(BASE_URL)
                 .build()
         )
-        CrashHandler.init(this, CrashConfig.Builder().build())
+        CrashHandler.init(CrashConfig.Builder(this).build())
     }
 }

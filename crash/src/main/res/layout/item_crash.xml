@@ -15,7 +15,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="2"
-        android:textColor="#424242"
+        android:textColor="@color/crash_black"
         android:textSize="16sp"
         android:textStyle="bold|italic"
         tools:text="java.lang.IllegalArgumentException" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginBottom="6dp"
-        android:textColor="#9e9e9e"
+        android:textColor="@color/crash_grey_3nd"
         android:textSize="9sp"
         tools:text="2021/12/13" />
 </androidx.appcompat.widget.LinearLayoutCompat>

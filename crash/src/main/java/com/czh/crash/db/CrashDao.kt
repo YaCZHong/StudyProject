@@ -1,11 +1,12 @@
 package com.czh.crash.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface CrashDao {
+internal interface CrashDao {
     @Query("SELECT * FROM crash")
-    suspend fun getAll(): List<Crash>
+    fun getAll(): LiveData<List<Crash>>
 
     @Query("SELECT * FROM crash where uid = :uid")
     suspend fun getCrash(uid: Int): Crash

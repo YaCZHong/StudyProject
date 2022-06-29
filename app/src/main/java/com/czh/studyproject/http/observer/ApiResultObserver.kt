@@ -16,7 +16,8 @@ import com.czh.xhlib.toast.toast
 class ApiResultObserver<T>(
     private val onSuccess: (T) -> Unit,
     private val onFailure: ((apiCode: Int, apiMsg: String) -> Unit)? = null,
-    private val onError: ((errorCode: Int, errorMsg: String) -> Unit)? = null
+    private val onError: ((errorCode: Int, errorMsg: String) -> Unit)? = null,
+    private val onComplete: (() -> Unit)? = null
 ) : Observer<ApiResult<T>> {
     override fun onChanged(apiResult: ApiResult<T>) {
         when (apiResult) {
@@ -36,5 +37,6 @@ class ApiResultObserver<T>(
                     ?: toast(apiResult.errorMsg)
             }
         }
+        onComplete?.invoke()
     }
 }

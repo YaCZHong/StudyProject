@@ -43,7 +43,7 @@ class CrashListActivity : CrashBaseActivity() {
     }
 
     private fun initData() {
-        vm.readAllCrashFromDB().observe(this) { list ->
+        vm.crashes.observe(this) { list ->
             list?.let {
                 mAdapter = CrashAdapter(it) { crash ->
                     CrashInfoActivity.actionStart(this, crash.uid)

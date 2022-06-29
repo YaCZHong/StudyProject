@@ -9,7 +9,7 @@ import com.czh.crash.R
 import com.czh.crash.db.Crash
 import com.czh.crash.ui.util.ParseTimeUtil
 
-class CrashAdapter(private val data: List<Crash>, private val onClick: (Crash) -> Unit) :
+internal class CrashAdapter(private val data: List<Crash>, private val onClick: (Crash) -> Unit) :
     RecyclerView.Adapter<CrashAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View, private val onClick: (Crash) -> Unit) :

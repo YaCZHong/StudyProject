@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class MyItemDecoration : RecyclerView.ItemDecoration() {
+internal class MyItemDecoration : RecyclerView.ItemDecoration() {
 
     private val size = 24
 

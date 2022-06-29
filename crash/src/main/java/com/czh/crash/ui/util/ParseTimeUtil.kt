@@ -3,7 +3,7 @@ package com.czh.crash.ui.util
 import java.text.SimpleDateFormat
 import java.util.*
 
-object ParseTimeUtil {
+internal object ParseTimeUtil {
     private const val FORMAT_PATTERN = "yyyy/MM/dd HH:mm"
     private val threadLocal = ThreadLocal<SimpleDateFormat>()
 

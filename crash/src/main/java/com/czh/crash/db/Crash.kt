@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Keep
 @Entity
-data class Crash(
+internal data class Crash(
     @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     @ColumnInfo val timestamp: Long,
     @ColumnInfo val userId: String = "",

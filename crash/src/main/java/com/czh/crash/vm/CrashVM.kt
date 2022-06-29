@@ -9,16 +9,9 @@ import com.czh.crash.db.Crash
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CrashVM : ViewModel() {
+internal class CrashVM : ViewModel() {
 
-    fun readAllCrashFromDB(): LiveData<List<Crash>> {
-        val liveData = MutableLiveData<List<Crash>>()
-        viewModelScope.launch(Dispatchers.IO) {
-            val list = CrashHandler.getCrashDb().CrashDao().getAll()
-            liveData.postValue(list)
-        }
-        return liveData
-    }
+    val crashes: LiveData<List<Crash>> = CrashHandler.getCrashDb().CrashDao().getAll()
 
     fun readCrashFromDB(uid: Int): LiveData<Crash> {
         val liveData = MutableLiveData<Crash>()

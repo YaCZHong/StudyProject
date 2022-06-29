@@ -11,7 +11,7 @@ import com.czh.crash.R
 import com.czh.crash.ui.util.ParseTimeUtil
 import com.czh.crash.vm.CrashVM
 
-internal class CrashInfoActivity : CrashBaseActivity() {
+class CrashInfoActivity : CrashBaseActivity() {
     companion object {
         private const val UID = "uid"
 
